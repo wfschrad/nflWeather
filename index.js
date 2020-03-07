@@ -64,9 +64,9 @@ const Bills_ZipCode = 14127;
 const SLT_ZipCode = 96150;
 const urlTemplate = `https://api.openweathermap.org/data/2.5/weather?zip=`//94040,us
 
-async function getWeatherData(zips) {
+async function getWeatherData(locations) {
     //const res = locations.map((zipCode) => {
-        zips.forEach(async zipCode => {
+        locations.forEach(async zipCode => {
             const url = urlTemplate + `${zipCode},us&APPID=${weatherMapKey}`;
             const res = await fetch(url)
                 .then(res => res.json())
@@ -80,9 +80,10 @@ function convertToFahren(kel) {
 }
 
  async function runTest() {
-    const zips = [96161, 68164];
-    const res = await getWeatherData(zips);
+    const locations = [96161, 68164];
+    const res = await getWeatherData(locations);
     console.log(res);
+    
 }
 
 runTest();
