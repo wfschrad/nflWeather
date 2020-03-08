@@ -60,9 +60,14 @@
 const fetch = require('node-fetch');
 
 const weatherMapKey = `a509b5ac1e04c56be1d0e37fdaf7ca6d`;
-const Bills_ZipCode = 14127;
-const SLT_ZipCode = 96150;
+//AFC East
+const Bills_ZipCode = '14127';
+const Dolphins_ZipCode = '33056';
+const Jets_ZipCode = '07073';
+const Patriots_ZipCode = '02035';
+
 const urlTemplate = `https://api.openweathermap.org/data/2.5/weather?zip=`//94040,us
+//--------------------------------------------------------------------------------------
 
 function getWeatherData(locations) {
     //const res = locations.map((zipCode) => {
@@ -78,9 +83,12 @@ function convertToFahren(kel) {
     return (9/5)*kel -459.67;
 }
 async function runTest() {
-    const locations = [Bills_ZipCode, 89449];
+    const locations = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
     //const res = getWeatherData(locations);
    const res = await Promise.all(getWeatherData(locations))
+//    console.log(res);
+//    console.log(`weather subObj: ${JSON.stringify(res[0].weather)}`);
+   console.log(`description: ${res[0].weather[0].description}`);
    console.log(res);
         // .then(weatherObjs => console.log(weatherObjs))
         // console.log(weatherObjs)
