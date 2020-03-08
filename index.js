@@ -64,13 +64,12 @@ const Bills_ZipCode = 14127;
 const SLT_ZipCode = 96150;
 const urlTemplate = `https://api.openweathermap.org/data/2.5/weather?zip=`//94040,us
 
-async function getWeatherData(locations) {
+function getWeatherData(locations) {
     //const res = locations.map((zipCode) => {
-        locations.forEach(async zipCode => {
+        return locations.map(zipCode => {
             const url = urlTemplate + `${zipCode},us&APPID=${weatherMapKey}`;
-            const res = await fetch(url)
+            return fetch(url)
                 .then(res => res.json())
-                .then(data =>console.log(data))
         });
 }
 
@@ -78,13 +77,21 @@ async function getWeatherData(locations) {
 function convertToFahren(kel) {
     return (9/5)*kel -459.67;
 }
-
- async function runTest() {
-    const locations = [96161, 68164];
-    const res = await getWeatherData(locations);
-    console.log(res);
-    
+async function runTest() {
+    const locations = [Bills_ZipCode, 89449];
+    //const res = getWeatherData(locations);
+   const res = await Promise.all(getWeatherData(locations))
+   console.log(res);
+        // .then(weatherObjs => console.log(weatherObjs))
+        // console.log(weatherObjs)
 }
+
+//  async function runTest() {
+//     const locations = [96161, 68164];
+//     const res = await getWeatherData(locations);
+//     console.log(res);
+
+// }
 
 runTest();
 
