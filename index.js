@@ -82,62 +82,39 @@ function getWeatherData(locations) {
 function convertToFahren(kel) {
     return (9/5)*kel -459.67;
 }
-async function runTest() {
-    const locations = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
-    //const res = getWeatherData(locations);
-   const res = await Promise.all(getWeatherData(locations))
-//    console.log(res);
-//    console.log(`weather subObj: ${JSON.stringify(res[0].weather)}`);
-   console.log(`description: ${res[0].weather[0].description}`);
-   console.log(res);
-        // .then(weatherObjs => console.log(weatherObjs))
-        // console.log(weatherObjs)
+
+//extract relevant data from weather object for rendering
+function extractWeatherData(obj) {
+    const description = obj.weather[0].description;
+    const temp = convertToFahren(obj.main.temp);
+    const wind = obj.wind.speed;
+    const rain = obj.rain;
+    if (rain) {
+        rain1h = rain['1h'];
+        rain3h = rain['3h'];
+    }
+    const snow = obj.snow;
+    if (snow) {
+        snow1h = snow['1h'];
+        snow3h = snow['3h'];
+    }
+
+    const myWeatherObj = {
+        description,
+        temp,
+        wind,
+        // rain1h,
+        // rain3h,
+        // snow1h,
+        // snow3h
+    }
+    console.log(`myWeatherObj: ${JSON.stringify(myWeatherObj, null, 2)}`);
 }
 
-//  async function runTest() {
-//     const locations = [96161, 68164];
-//     const res = await getWeatherData(locations);
-//     console.log(res);
-
-// }
+async function runTest() {
+    const locations = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
+    const res = await Promise.all(getWeatherData(locations))
+    extractWeatherData(res[0]);
+}
 
 runTest();
-
-
-// function fetchWithHeader(url, headerKey, headerVal, fileName) {
-//     console.log(`url: ${url}, headerKey: ${headerKey}, headerVal: ${headerVal}, fileName: ${fileName}`);
-//     let myHeader = new Headers();
-//     myHeader.append(headerKey, headerVal);
-//     console.log(`myHeader: ${(myHeader)}`);
-//     fetch(url, {header: myHeader})
-//         .then(res => res.text())
-//         .then(data => fsPromises.writeFile(fileName, data))
-//         .catch(reason => console.log(`${reason}`));
-// }
-
-
-// function dumpHeader(url, fileName) {
-// fetch(url)
-//     .then(res => {
-//         let myArray = [];
-//         for (let [key, value] of res.headers.entries()) {
-//             const line = `${key}: ${value}`;
-//             myArray.push(line);
-//         }
-//         const data = myArray.join('\n');
-
-//         fsPromises.writeFile(fileName, data);
-//         return res;
-//     })
-//     .then(res => res.text())
-//     .catch(reason => console.log(`${reason}`));
-// }
-
-// function sendData (url, string) {
-//     //let newBlob = new Blob([string])
-//     //console.log(`blob: ${newBlob}`)
-//     fetch(url, {body: string, method: 'POST'})
-//         .then(res => res.text())
-//         .then(text => console.log(text))
-//         .catch(reason => console.log(`Could not resolve host: ${reason}`));
-// }
