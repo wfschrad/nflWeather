@@ -57,7 +57,7 @@
 
 
 
-const fetch = require('node-fetch');
+//import fetch from 'fetch';
 
 const weatherMapKey = `a509b5ac1e04c56be1d0e37fdaf7ca6d`;
 //AFC East
@@ -73,7 +73,7 @@ function getWeatherData(locations) {
     //const res = locations.map((zipCode) => {
         return locations.map(zipCode => {
             const url = urlTemplate + `${zipCode},us&APPID=${weatherMapKey}`;
-            return fetch(url)
+            return window.fetch(url)
                 .then(res => res.json())
         });
 }
@@ -86,9 +86,10 @@ function convertToFahren(kel) {
 //extract relevant data from weather object for rendering
 function extractWeatherData(obj) {
     const description = obj.weather[0].description;
-    const temp = convertToFahren(obj.main.temp);
+    const temp = Math.round(convertToFahren(obj.main.temp));
     const wind = obj.wind.speed;
     const rain = obj.rain;
+    const location = obj.name;
     if (rain) {
         rain1h = rain['1h'];
         rain3h = rain['3h'];
@@ -103,13 +104,43 @@ function extractWeatherData(obj) {
         description,
         temp,
         wind,
+        location
         // rain1h,
         // rain3h,
         // snow1h,
         // snow3h
     }
-    console.log(`myWeatherObj: ${JSON.stringify(myWeatherObj, null, 2)}`);
+    //console.log(`myWeatherObj: ${JSON.stringify(myWeatherObj, null, 2)}`);
+    return myWeatherObj;
 }
+
+//html script
+    console.log('running');
+    const locationEl = document.getElementById('location');
+    const tempEl = document.getElementById('temp');
+    const windEl = document.getElementById('wind');
+    const conditionsEl = document.getElementById('conditions');
+
+    //runTest();
+    //let myTest;
+    const locations = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
+    Promise.all(getWeatherData(locations))
+        .then((res) => {
+            console.log(`res: ${JSON.stringify(res, null, 2)}`)
+            console.log("after promiseAll");
+            const myTest = extractWeatherData(res[0])
+            locationEl.innerHTML += myTest.location;
+            tempEl.innerHTML += myTest.temp;
+            windEl.innerHTML += myTest.wind;
+            conditionsEl.innerHTML += myTest.description;
+            console.log(`myTest: ${JSON.stringify(myTest, null, 2)}`)
+        })
+        // .then((myTest) => {
+        //     temp.innerHTML+=myTest.wind;
+        //     console.log(`myTest: ${JSON.stringify(myTest, null, 2)}`)
+        // });
+  
+
 
 async function runTest() {
     const locations = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
