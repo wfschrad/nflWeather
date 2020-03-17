@@ -6,10 +6,6 @@
 //  3. render data
 //  4. re-retrieve data at relevant intervals
 
-//Buffalo Bills Stadium: Orchard Park, NY
-
-//require fetch
-
 //----------------------------
 //Parameters:
 // coord
@@ -54,11 +50,6 @@
 // name City name
 // cod Internal parameter
 
-
-
-
-//import fetch from 'fetch';
-
 const weatherMapKey = `a509b5ac1e04c56be1d0e37fdaf7ca6d`;
 //AFC East
 const Bills_ZipCode = '14127';
@@ -90,16 +81,11 @@ function extractWeatherData(obj) {
     const wind = obj.wind.speed;
     const rain = obj.rain;
     const location = obj.name;
-    if (rain) {
-        rain1h = rain['1h'];
-        rain3h = rain['3h'];
-    }
-    const snow = obj.snow;
-    if (snow) {
-        snow1h = snow['1h'];
-        snow3h = snow['3h'];
-    }
-
+    let snow1h;
+    let snow3h;
+    let rain1h;
+    let rain3h;
+    
     const myWeatherObj = {
         description,
         temp,
@@ -110,38 +96,73 @@ function extractWeatherData(obj) {
         // snow1h,
         // snow3h
     }
+
+    if (rain) {
+        rain1h = rain['1h'];
+        rain3h = rain['3h'];
+    }
+    const snow = obj.snow;
+    if (snow) {
+        snow1h = snow['1h'];
+        myWeatherObj.snow1h= snow1h;
+        snow3h = snow['3h'];
+        myWeatherObj.snow3h= snow3h;
+    }
     //console.log(`myWeatherObj: ${JSON.stringify(myWeatherObj, null, 2)}`);
     return myWeatherObj;
 }
 
 //html script
-    console.log('running');
+    //console.log('running');
     const locationEl = document.getElementById('location');
     const tempEl = document.getElementById('temp');
     const windEl = document.getElementById('wind');
     const conditionsEl = document.getElementById('conditions');
 
+    const locationEl2 = document.getElementById('location2');
+    const tempEl2 = document.getElementById('temp2');
+    const windEl2 = document.getElementById('wind2');
+    const conditionsEl2 = document.getElementById('conditions2');
+
+    const locationEl3 = document.getElementById('location3');
+    const tempEl3 = document.getElementById('temp3');
+    const windEl3 = document.getElementById('wind3');
+    const conditionsEl3 = document.getElementById('conditions3');
+
     //runTest();
     //let myTest;
-    const locations = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
+    const locations = ['96151', Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
     Promise.all(getWeatherData(locations))
         .then((res) => {
-            console.log(`res: ${JSON.stringify(res, null, 2)}`)
-            console.log("after promiseAll");
+            //weather obj 1
+            // console.log(`res: ${JSON.stringify(res, null, 2)}`)
+            // console.log("after promiseAll");
             const myTest = extractWeatherData(res[0])
             locationEl.innerHTML += myTest.location;
             tempEl.innerHTML += myTest.temp;
             windEl.innerHTML += myTest.wind;
             conditionsEl.innerHTML += myTest.description;
-            console.log(`myTest: ${JSON.stringify(myTest, null, 2)}`)
+            //console.log(`myTest: ${JSON.stringify(myTest, null, 2)}`)
+
+            //weather obj 2
+            const myTest2 = extractWeatherData(res[1])
+            locationEl2.innerHTML += myTest2.location;
+            tempEl2.innerHTML += myTest2.temp;
+            windEl2.innerHTML += myTest2.wind;
+            conditionsEl2.innerHTML += myTest2.description;
+
+            //weather obj 3
+            const myTest3 = extractWeatherData(res[2])
+            locationEl3.innerHTML += myTest3.location;
+            tempEl3.innerHTML += myTest3.temp;
+            windEl3.innerHTML += myTest3.wind;
+            conditionsEl3.innerHTML += myTest3.description;
         })
         // .then((myTest) => {
         //     temp.innerHTML+=myTest.wind;
         //     console.log(`myTest: ${JSON.stringify(myTest, null, 2)}`)
         // });
   
-
-
 async function runTest() {
     const locations = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode];
     const res = await Promise.all(getWeatherData(locations))
