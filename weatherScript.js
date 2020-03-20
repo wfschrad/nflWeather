@@ -9,6 +9,16 @@ const WeatherFetcher = require('./weatherFetcher.js');
 
 const myWeatherFetcher = new WeatherFetcher();
 
+//HTML SCRIPT
+//[1,1,1,1] used as test filterArray
+async function init() {
+    const stadiumZips = filterLocations(nflZips, [1,1,1,1]);
+    const myData = await myWeatherFetcher.getWeatherData(stadiumZips);
+    console.log('myData: ', myData)
+}
+init();
+
+
 function setLocationFilter(filter) {
     filter[0] = 1;
     filter[3] = 1;
@@ -25,4 +35,4 @@ function runTest() {
     console.log("relevant zips: ", relevantZips);
 }
 
-runTest();
+//runTest();

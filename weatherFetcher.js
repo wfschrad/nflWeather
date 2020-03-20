@@ -9,14 +9,14 @@ class WeatherFetcher {
         this.key = weatherMapKey;
     }
 
-    async getWeatherObj(locations) {
-            let weatherData = await Promise.all(locations.map(zipCode => {
+    async getWeatherData(locations) {
+            let weatherDataArray = await Promise.all(locations.map(zipCode => {
                 const url = urlTemplate + `${zipCode},us&APPID=${this.key}`;
                 return fetch(url)
                     .then(res => res.json())
             }));
-            console.log(`weatherData19`, weatherData)
-            return this.extractRelevantData(weatherData);
+           // console.log(`weatherDataArray`, weatherDataArray)
+            return this.extractRelevantData(weatherDataArray);
     }
 
     extractRelevantData(objArray) {
@@ -100,7 +100,7 @@ class WeatherFetcher {
 }
 async function runTest() {
     const wf = new WeatherFetcher();
-    const res = await wf.getWeatherObj(['96151', '68164']);
+    const res = await wf.getWeatherData(['96151', '68164']);
     console.log('res', JSON.stringify(res, null, 2));
 }
 
