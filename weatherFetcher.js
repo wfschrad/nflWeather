@@ -1,9 +1,9 @@
 
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 const urlTemplate = `https://api.openweathermap.org/data/2.5/weather?zip=`;
 const weatherMapKey = `a509b5ac1e04c56be1d0e37fdaf7ca6d`;
 
-class WeatherFetcher {
+export class WeatherFetcher {
 
     constructor () {
         this.key = weatherMapKey;
@@ -105,4 +105,4 @@ async function runTest() {
 }
 
 //runTest();
-module.exports = WeatherFetcher;
+//module.exports = WeatherFetcher;

@@ -43,7 +43,7 @@ const Seahawks_ZipCode = '98134';
 const Rams_ZipCode = '90037';
 const Cardinals_ZipCode = '85305';
 
-const nflZips = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode, 
+export const nflZips = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode, 
                  Steelers_ZipCode, Ravens_ZipCode, Bengals_ZipCode, Browns_ZipCode,
                  Texans_ZipCode, Titans_ZipCode, Colts_ZipCode, Jaguars_ZipCode,
                  Chargers_ZipCode, Raiders_ZipCode, Chiefs_ZipCode, Broncos_ZipCode,
@@ -52,4 +52,4 @@ const nflZips = [Bills_ZipCode, Dolphins_ZipCode, Jets_ZipCode, Patriots_ZipCode
                  Panthers_ZipCode, Saints_ZipCode, Buccaneers_ZipCode, Falcons_ZipCode,
                  Niners_ZipCode, Seahawks_ZipCode, Rams_ZipCode, Cardinals_ZipCode,];
 
-                 module.exports = {nflZips};
+                 //module.exports = {nflZips};

@@ -4,8 +4,8 @@
 //send array through weatherFetcher
 //Use css to display results, highlighting specific features that may be of interest
 
-const {nflZips} = require('./zipCodes.js');
-const WeatherFetcher = require('./weatherFetcher.js');
+import {nflZips} from './zipCodes.js';
+import {WeatherFetcher} from './weatherFetcher.js';
 
 const myWeatherFetcher = new WeatherFetcher();
 
@@ -13,10 +13,43 @@ const myWeatherFetcher = new WeatherFetcher();
 //[1,1,1,1] used as test filterArray
 async function init() {
     const stadiumZips = filterLocations(nflZips, [1,1,1,1]);
-    const myData = await myWeatherFetcher.getWeatherData(stadiumZips);
-    console.log('myData: ', myData)
+    const weatherObjArray = await myWeatherFetcher.getWeatherData(stadiumZips)
+    weatherObjArray.forEach((weatherObj, index) => {
+        const newPane = document.createElement('div');
+        newPane.setAttribute('id', `stadiumPane-${index}`);
+        setData(newPane, weatherObj);
+        newPane.classList.add('content');
+        document.body.appendChild(newPane);
+    });
 }
 init();
+
+function setData(newPane, weatherObj) {
+        const location= document.createElement('div');
+        location.innerHTML = `Location: ${weatherObj.location}`;
+        const temp= document.createElement('div');
+        temp.innerHTML = `temp: ${weatherObj.temp}`;
+        const wind= document.createElement('div');
+        wind.innerHTML = `wind: ${weatherObj.wind}`;
+        const description= document.createElement('div');
+        description.innerHTML = `description: ${weatherObj.description}`;
+        newPane.appendChild(location);
+        newPane.appendChild(temp);
+        newPane.appendChild(wind);
+        newPane.appendChild(description);
+
+        //create child elements (divs for each attribute)
+        //add data
+        //append
+
+
+        // locationEl3.innerHTML += myTest3.location;
+        // tempEl3.innerHTML += myTest3.temp;
+        // windEl3.innerHTML += myTest3.wind;
+        // conditionsEl3.innerHTML += myTest3.description;
+}
+
+
 
 
 function setLocationFilter(filter) {
