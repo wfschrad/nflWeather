@@ -18,31 +18,67 @@ async function init() {
         const newPane = document.createElement('div');
         newPane.setAttribute('id', `stadiumPane-${index}`);
         setData(newPane, weatherObj);
+        newPane.classList.add('content');
+        setStyling(newPane);
         document.getElementById('weather-holder')
             .appendChild(newPane);
     });
 }
 init();
 
-function setData(newPane, weatherObj) {
+function setStyling(contentPane) {
+
+    //pane.childNodes.
+    //case id, apply logic appropriately
+
+    //could also apply attribute classes (loc, temp, wind etc) and use querySelectorAll(?)
+    //loop through nodes
+    let val;
+    for (let attribute of contentPane.childNodes) {
+        const divClass = attribute.className;
+        console.log(`div class: ${divClass}`);
+        switch (divClass) {
+            case 'location': 
+                break;
+            case 'temp': 
+                val = Number.parseInt(attribute.innerHTML.slice(6,8));
+                if (val <= 35) contentPane.classList.add('temp-flag');
+                break;
+            case 'wind':
+                val = Number.parseInt(attribute.innerHTML.slice(6,9));
+                if (val >= 5) {
+                    contentPane.classList.add('wind-flag');
+                }
+            case 'description':
+        }
+    }
+
+}
+
+function setData(contentPane, weatherObj) {
         const location= document.createElement('div');
+        location.setAttribute('class', 'location');
         location.innerHTML = `Location: ${weatherObj.location}`;
         const temp= document.createElement('div');
+        temp.setAttribute('class', 'temp');
         temp.innerHTML = `temp: ${weatherObj.temp}`;
         const wind= document.createElement('div');
+        wind.setAttribute('class', 'wind');
         wind.innerHTML = `wind: ${weatherObj.wind}`;
         const description= document.createElement('div');
+        description.setAttribute('class', 'description');
         description.innerHTML = `description: ${weatherObj.description}`;
-        newPane.appendChild(location);
-        newPane.appendChild(temp);
-        newPane.appendChild(wind);
-        newPane.appendChild(description);
+        contentPane.appendChild(location);
+        contentPane.appendChild(temp);
+        contentPane.appendChild(wind);
+        contentPane.appendChild(description);
+}
 
         //set border
-        debugger;
-        if (Number.parseInt(weatherObj.wind) >= 5) newPane.classList.add('wind-flag');
-        else newPane.classList.add('content');
-}
+        // debugger;
+        // if (Number.parseInt(weatherObj.wind) >= 5) newPane.classList.add('wind-flag');
+        // else newPane.classList.add('content');
+//}
 
 
 

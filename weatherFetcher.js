@@ -20,8 +20,6 @@ export class WeatherFetcher {
     }
 
     extractRelevantData(objArray) {
-        //incorrect api key???
-        console.log(`objArray: ${objArray}`);
         objArray.forEach((obj, index) => {
             const location = obj.name;
             const description = obj.weather[0].description;
