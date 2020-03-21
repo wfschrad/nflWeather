@@ -12,14 +12,14 @@ const myWeatherFetcher = new WeatherFetcher();
 //HTML SCRIPT
 //[1,1,1,1] used as test filterArray
 async function init() {
-    const stadiumZips = filterLocations(nflZips, [1,1,1,1]);
+    const stadiumZips = filterLocations(nflZips, [1,1,1,1, 1, 1, 1, 1]);
     const weatherObjArray = await myWeatherFetcher.getWeatherData(stadiumZips)
     weatherObjArray.forEach((weatherObj, index) => {
         const newPane = document.createElement('div');
         newPane.setAttribute('id', `stadiumPane-${index}`);
         setData(newPane, weatherObj);
-        newPane.classList.add('content');
-        document.body.appendChild(newPane);
+        document.getElementById('weather-holder')
+            .appendChild(newPane);
     });
 }
 init();
@@ -38,15 +38,10 @@ function setData(newPane, weatherObj) {
         newPane.appendChild(wind);
         newPane.appendChild(description);
 
-        //create child elements (divs for each attribute)
-        //add data
-        //append
-
-
-        // locationEl3.innerHTML += myTest3.location;
-        // tempEl3.innerHTML += myTest3.temp;
-        // windEl3.innerHTML += myTest3.wind;
-        // conditionsEl3.innerHTML += myTest3.description;
+        //set border
+        debugger;
+        if (Number.parseInt(weatherObj.wind) >= 5) newPane.classList.add('wind-flag');
+        else newPane.classList.add('content');
 }
 
 

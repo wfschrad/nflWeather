@@ -5,3 +5,15 @@
     padding: 10px;
     margin-top: 8px;
 }
+
+.holder{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.wind-flag{
+    border: 7px solid blue;
+    width: 200px;
+    height: 80px; 
+    padding: 10px;
+    margin-top: 8px;
+}
