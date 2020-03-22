@@ -13,6 +13,7 @@
 
 .temp-flag {
     border-color: purple;
+    border-style: dashed;
 }
 .wind-flag {
     border-color: lightskyblue;

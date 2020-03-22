@@ -25,6 +25,15 @@ async function init() {
     });
 }
 init();
+createFilterForm();
+
+function createFilterForm() {
+    const filterForm = document.createElement('form');
+    filterForm.classList.add('filter-form');
+
+    const tempThreshold = document.createElement('input');
+
+}
 
 function setStyling(contentPane) {
 
