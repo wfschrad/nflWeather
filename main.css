@@ -10,12 +10,16 @@ h1 {
 }
 
 .content {
+    /* display: flex;
+    align-items: center; put in content wrapper???*/
     border: 4px solid gray;
     width: 200px;
     height: 120px; 
     padding: 8px;
     text-align: left;
     margin-top: 10px;
+    transition: .5s;
+
 }
 
 .holder{
@@ -34,8 +38,10 @@ h1 {
 }
 
 .content:hover {
+    /* width: 220px;
+    height: 140px;  Increase size upon hover (once flex content-wrapper is implemented???*/
     box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.5);
-    margin-top: 2px;
-    transition-property: margin-top;
-    transition: .5s;
+    transform: translate(2px, -8px);
+    /* box-sizing: content-box;
+    border-width: 7px; Can be used to achieve largening effect as well, still need to adjust content display after re-size*/
 }
