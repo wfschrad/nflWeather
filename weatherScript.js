@@ -14,6 +14,9 @@ const myWeatherFetcher = new WeatherFetcher();
 async function init() {
     const stadiumZips = filterLocations(nflZips, [1,1,1,1, 1, 1, 1, 1]);
     const weatherObjArray = await myWeatherFetcher.getWeatherData(stadiumZips)
+    const flexContentWrapper = document.createElement('div');
+    flexContentWrapper.classList.add('content__wrapper');
+
     weatherObjArray.forEach((weatherObj, index) => {
         const newPane = document.createElement('div');
         newPane.setAttribute('id', `stadiumPane-${index}`);
@@ -21,11 +24,11 @@ async function init() {
         newPane.classList.add('content');
         setStyling(newPane);
         //add flex-wrapper, append newPane to wrapper, swap wrapper for newPane in document append
-        const flexContentWrapper = document.createElement('div');
-        flexContentWrapper.classList.add('content__wrapper');
         flexContentWrapper.appendChild(newPane);
         document.getElementById('weather-holder')
             .appendChild(flexContentWrapper);
+        // document.getElementById('main__wrapper')
+        //     .appendChild(flexContentWrapper);
     });
 }
 init();
