@@ -20,8 +20,12 @@ async function init() {
         setData(newPane, weatherObj);
         newPane.classList.add('content');
         setStyling(newPane);
+        //add flex-wrapper, append newPane to wrapper, swap wrapper for newPane in document append
+        const flexContentWrapper = document.createElement('div');
+        flexContentWrapper.classList.add('content__wrapper');
+        flexContentWrapper.appendChild(newPane);
         document.getElementById('weather-holder')
-            .appendChild(newPane);
+            .appendChild(flexContentWrapper);
     });
 }
 init();

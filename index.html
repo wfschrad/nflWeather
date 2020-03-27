@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,12 @@
     <script type="module" src="./weatherScript.js"></script>
     <link rel="stylesheet" href="./main.css" />
 </head>
+
 <body>
     <h1><b>Stadium Weather Tracker</b></h1>
-    <div id="weather-holder" class="holder">
-        <!--<div id="weather-content" class="content">
+    <div id="main__wrapper">
+        <div id="weather-holder" class="holder">
+            <!--<div id="weather-content" class="content">
             <div id="location">Location: </div>
             <div id="temp">Temp: </div>
             <div id="wind">Wind: </div>
@@ -31,8 +34,23 @@
             <div id="conditions3">Conditions: </div>
             <div id="precip3"></div>
         </div>-->
-    </div>
-    <div id="filter-form">
+        </div>
+        <div id="filter-form-wrapper">
+            <form class="filter-form">
+                <!-- <form action="/action_page.php">*/ -->
+                <fieldset>
+                    <legend>Select Custom Indicators</legend>
+                    <label for="tempBar">Choose Temperature Threshold</label>
+                    <input type="range" id=temp-input name="windbar" min="0" max="50">
+
+                    <label for="windBar">Choose Wind Threshold</label>
+                    <input type="range" id=wind-input name="windBar" min="0" max="50">
+
+                    <input type="submit">
+                </fieldset>
+            </form>
+        </div>
     </div>
 </body>
+
 </html>
