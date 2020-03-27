@@ -40,12 +40,14 @@
                 <!-- <form action="/action_page.php">*/ -->
                 <fieldset>
                     <legend>Select Custom Indicators</legend>
-                    <label for="tempBar">Choose Temperature Threshold</label>
-                    <input type="range" id=temp-input name="windbar" min="0" max="50">
-
-                    <label for="windBar">Choose Wind Threshold</label>
-                    <input type="range" id=wind-input name="windBar" min="0" max="50">
-
+                    <div id="form__tempBar">
+                        <label for="tempBar">Choose Temperature Threshold</label>
+                        <input type="range" id=temp-input name="windbar" min="0" max="50">
+                    </div>
+                    <div id="form__windBar">
+                        <label for="windBar">Choose Wind Threshold</label>
+                        <input type="range" id=wind-input name="windBar" min="0" max="50">
+                    </div>
                     <input type="submit">
                 </fieldset>
             </form>

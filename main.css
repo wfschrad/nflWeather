@@ -16,13 +16,33 @@ h1 {
     /* display: inline-block; */ 
     grid-area: content-weath;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 #filter-form-wrapper {
     width: 80%;
     margin: 10px;
     grid-area: form;
+
+    /* Curved border around the form. */
+    padding: 1em;
+   /* border: 1px solid #CCC; */
+    border-radius: 10%; 
+   
+
+    /* Make all the fonts in the form the same. */
+    font-family: Arial, Helvetica, sans-serif;
 }
+#form__windBar {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 2px;
+}
+#form__tempBar {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 6px;
+}
+
 
 #main__wrapper {
     display: grid;
@@ -40,6 +60,7 @@ h1 {
     padding: 8px;
     text-align: left;
     margin-top: 10px;
+    margin-left: 10px;
     transition: .5s;
 
 }
@@ -67,3 +88,77 @@ h1 {
     /* box-sizing: content-box;
     border-width: 7px; Can be used to achieve largening effect as well, still need to adjust content display after re-size*/
 }
+
+form {
+    /* Center the form on the page. */
+    margin: 0 auto;
+    width: 400px;
+  
+    /* Curved border around the form. */
+    padding: 1em;
+    /* border: 1px solid #CCC; */
+    border-radius: 1em;
+  
+    /* Make all the fonts in the form the same. */
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Every div after the first div in the form. */
+  /* form div + div {
+    margin-top: 1em;
+  } */
+  
+  label {
+    /* Uniform size & alignment for labels. */
+    font-size: 11px;
+    display: inline-block;
+    width: auto;
+    text-align: right;
+    padding-right: 3px;
+
+  }
+  
+  input,
+  textarea {
+    /* You must explicitly override the fonts in textareas and inputs. */
+    font-family: Arial, Helvetica, sans-serif;
+    /* text-align: right; */
+  
+    /* Uniform text field  and textarea sizes. */
+    width: 200px;
+    box-sizing: border-box;
+  
+    /* Match form field borders */
+    border: 1px solid #999;
+  }
+  
+  input:focus,
+  textarea:focus {
+    /* Additional highlight for focused elements */
+    border-color: #000;
+  }
+  
+  textarea {
+    /* Align multiline text fields with their labels */
+    vertical-align: top;
+  
+    /* Provide space to type some text */
+    height: 5em;
+  }
+  
+  select {
+    /* You must explicitly override the font in a select. */
+    font-family: Arial, Helvetica, sans-serif;
+  
+    /* Make the select as wide as the other form elements. */
+    width: 200px;
+  }
+  range {
+      text-align: right;
+  }
+  
+  
+  button {
+    /* Space the button to the right. */
+    margin-left: .5em;
+  }
