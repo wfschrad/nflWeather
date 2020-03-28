@@ -42,13 +42,16 @@
                     <legend>Select Custom Indicators</legend>
                     <div id="form__tempBar">
                         <label for="tempBar">Choose Temperature Threshold</label>
-                        <input type="range" id=temp-input name="windbar" min="0" max="50">
+                        <input type="range" value="50" id=temp-input name="tempBar" min="0" max="100" step="5">
+                        <output id="tempSlideVal"></output>
                     </div>
                     <div id="form__windBar">
                         <label for="windBar">Choose Wind Threshold</label>
-                        <input type="range" id=wind-input name="windBar" min="0" max="50">
+                        <input type="range" value="9" id=wind-input name="windBar" min="0" max="36" step="3">
+                        <output id="windSlideVal"></output>
+
                     </div>
-                    <input type="submit">
+                    <input class="filter-form__submit" type="submit">
                 </fieldset>
             </form>
         </div>

@@ -9,9 +9,14 @@ import {WeatherFetcher} from './weatherFetcher.js';
 
 const myWeatherFetcher = new WeatherFetcher();
 
+const tempSlide = document.getElementById('temp-input');
+const tempOut = document.getElementById('tempSlideVal');
+const windSlide = document.getElementById('wind-input');
+const windOut = document.getElementById('windSlideVal');
+
 //HTML SCRIPT
 //[1,1,1,1] used as test filterArray
-async function init() {
+async function initFetch() {
     const stadiumZips = filterLocations(nflZips, [1,1,1,1, 1, 1, 1, 1]);
     const weatherObjArray = await myWeatherFetcher.getWeatherData(stadiumZips)
     const flexContentWrapper = document.createElement('div');
@@ -31,16 +36,22 @@ async function init() {
         //     .appendChild(flexContentWrapper);
     });
 }
-init();
-createFilterForm();
 
-function createFilterForm() {
-    const filterForm = document.createElement('form');
-    filterForm.classList.add('filter-form');
-
-    const tempThreshold = document.createElement('input');
-
+function initSliders () {
+    tempOut.innerHTML = tempSlide.value+'°F';
+    windOut.innerHTML = windSlide.value+'mph';
 }
+
+initFetch();
+initSliders();
+//Add listeners
+
+tempSlide.addEventListener('change', () => {
+    tempOut.innerHTML = tempSlide.value+'°F';
+});
+windSlide.addEventListener('change', () => {
+    windOut.innerHTML = windSlide.value+'mph';
+});
 
 function setStyling(contentPane) {
 
@@ -54,9 +65,9 @@ function setStyling(contentPane) {
         const divClass = attribute.className;
         console.log(`div class: ${divClass}`);
         switch (divClass) {
-            case 'location': 
+            case 'location':
                 break;
-            case 'temp': 
+            case 'temp':
                 val = Number.parseInt(attribute.innerHTML.slice(6,8));
                 if (val <= 35) contentPane.classList.add('temp-flag');
                 break;
