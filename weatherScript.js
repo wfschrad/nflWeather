@@ -25,7 +25,7 @@ let windThreshold = windBarVal;
 
 //HTML SCRIPT
 //[1,1,1,1] used as test filterArray
-async function initFetch() {
+async function fetchWeather() {
     const stadiumZips = filterLocations(nflZips, [1,1,1,1, 1, 1, 1, 1]);
     const weatherObjArray = await myWeatherFetcher.getWeatherData(stadiumZips)
     const flexContentWrapper = document.createElement('div');
@@ -51,16 +51,16 @@ function initSliders () {
     windOut.innerHTML = windBarVal+'mph';
 }
 
-function initLegend() {
+function refreshLegend() {
     console.log("I am here")
     tempLegendOut.innerHTML = tempBarVal + '°F';
     windLegendOut.innerHTML = windBarVal + 'mph';
     console.log(tempBarVal)
 }
 
-initFetch();
+fetchWeather();
 initSliders();
-initLegend();
+refreshLegend();
 //Add listeners
 
 tempSlide.addEventListener('change', () => {
@@ -76,8 +76,18 @@ formSubmit.addEventListener('click', (ev) => {
     windBarVal = windSlide.value;
     tempThreshold = tempBarVal;
     windThreshold = windBarVal;
-    initLegend();
+    //re-send content panes through styling-flag logic
+    //different button will allow for weather re-fetching
+    resetStyling();
+    refreshLegend();
 })
+
+function resetStyling() {
+    const contentPanes = document.querySelectorAll('.content');
+    for (let pane of contentPanes) {
+        setStyling(pane);
+    }
+}
 
 function setStyling(contentPane) {
 
@@ -95,13 +105,14 @@ function setStyling(contentPane) {
                 break;
             case 'temp':
                 val = Number.parseInt(attribute.innerHTML.slice(6,8));
-                if (val <= 35) contentPane.classList.add('temp-flag');
+                if (val <= tempThreshold) contentPane.classList.add('temp-flag');
+                else contentPane.classList.remove('temp-flag');
                 break;
             case 'wind':
                 val = Number.parseInt(attribute.innerHTML.slice(6,9));
-                if (val >= 5) {
-                    contentPane.classList.add('wind-flag');
-                }
+                if (val >= windThreshold) contentPane.classList.add('wind-flag');
+                else contentPane.classList.remove('wind-flag');
+                break;
             case 'description':
         }
     }

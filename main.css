@@ -6,6 +6,7 @@
 
 h1 {
     margin-top: 10px;
+    padding: 10px;
     text-align: center;
 }
 #main__wrapper {
@@ -88,11 +89,11 @@ h1 {
 
 }
 .threshold-legend__wind {
-  color: lightblue;
+  color: rgb(225, 197, 76);
   font-weight: 900;
 }
 .threshold-legend__temp {
-  color: purple;
+  color: lightskyblue;
   font-weight: 900;
 }
 
@@ -119,11 +120,10 @@ h1 {
 } */
 
 .temp-flag {
-    border-color: indigo;
-    border-style: dashed;
+  border-color: lightskyblue;
 }
 .wind-flag {
-    border-color: lightskyblue;
+  border-color: rgb(225, 197, 76);
 }
 
 .content:hover {
