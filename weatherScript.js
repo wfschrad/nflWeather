@@ -13,6 +13,15 @@ const tempSlide = document.getElementById('temp-input');
 const tempOut = document.getElementById('tempSlideVal');
 const windSlide = document.getElementById('wind-input');
 const windOut = document.getElementById('windSlideVal');
+const formSubmit = document.querySelector('.filter-form__submit');
+const tempLegendOut = document.querySelector('.threshold-legend__temp');
+const windLegendOut = document.querySelector('.threshold-legend__wind');
+
+let tempBarVal = tempSlide.value;
+let windBarVal = windSlide.value;
+let tempThreshold = tempBarVal;
+let windThreshold = windBarVal;
+
 
 //HTML SCRIPT
 //[1,1,1,1] used as test filterArray
@@ -38,12 +47,20 @@ async function initFetch() {
 }
 
 function initSliders () {
-    tempOut.innerHTML = tempSlide.value+'°F';
-    windOut.innerHTML = windSlide.value+'mph';
+    tempOut.innerHTML = tempBarVal+'°F';
+    windOut.innerHTML = windBarVal+'mph';
+}
+
+function initLegend() {
+    console.log("I am here")
+    tempLegendOut.innerHTML = tempBarVal + '°F';
+    windLegendOut.innerHTML = windBarVal + 'mph';
+    console.log(tempBarVal)
 }
 
 initFetch();
 initSliders();
+initLegend();
 //Add listeners
 
 tempSlide.addEventListener('change', () => {
@@ -52,6 +69,15 @@ tempSlide.addEventListener('change', () => {
 windSlide.addEventListener('change', () => {
     windOut.innerHTML = windSlide.value+'mph';
 });
+formSubmit.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    //do stuff now
+    tempBarVal = tempSlide.value;
+    windBarVal = windSlide.value;
+    tempThreshold = tempBarVal;
+    windThreshold = windBarVal;
+    initLegend();
+})
 
 function setStyling(contentPane) {
 

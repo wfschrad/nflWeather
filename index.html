@@ -49,11 +49,22 @@
                         <label for="windBar">Choose Wind Threshold</label>
                         <input type="range" value="9" id=wind-input name="windBar" min="0" max="36" step="3">
                         <output id="windSlideVal"></output>
-
                     </div>
-                    <input class="filter-form__submit" type="submit">
+                    <div class="filter-form__button-wrapper">
+                        <input class="filter-form__submit" type="submit">
+                    </div>
                 </fieldset>
             </form>
+            <div class="threshold-legend">
+                <div class="threshold-legend__temp-wrap">
+                    <label for="legend-temp">Temperature-Flag Threshold: </label>
+                    <div class="threshold-legend__temp" name="legend-temp"></div>
+                </div>
+                <div class="threshold-legend__wind-wrap">
+                    <label for="legend-wind">Wind-Flag Threshold: </label>
+                    <div class="threshold-legend__wind" name="legend-wind"></div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

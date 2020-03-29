@@ -26,6 +26,7 @@ h1 {
 }
 #filter-form-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     width: 100%;
     /* margin: 10px; */
@@ -51,7 +52,49 @@ h1 {
     padding-top: 6px;
 }
 
+.threshold-legend {
+  /* display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-start: 2; */
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  border: 1px solid gray;
+  width: 280px;
+  height: 80px;
+  padding: 2px;
+  margin-left: 4px;
+ // box-shadow: 1px 1px 17px 1px rgba(0,0,0,.3);
 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 6px;
+}
+.threshold-legend__temp-wrap, .threshold-legend__wind-wrap {
+  grid-column: 1/2;
+  display: flex;
+  justify-content: flex-end;
+  line-height: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+.threshold-legend__temp-wrap label, .threshold-legend__wind-wrap label {
+  font-weight: 600;
+}
+.threshold-legend__temp-wrap {
+  margin-top: 26px;
+
+}
+.threshold-legend__wind {
+  color: lightblue;
+  font-weight: 900;
+}
+.threshold-legend__temp {
+  color: purple;
+  font-weight: 900;
+}
 
 .content {
     /* display: flex;
@@ -91,12 +134,13 @@ h1 {
     /* box-sizing: content-box;
     border-width: 7px; Can be used to achieve largening effect as well, still need to adjust content display after re-size*/
 }
-
+/* Issue with fieldset default formatting??? Constraining heighth
+    Height will need to be shrank to accomodate threshold legen added to form wrapper */
 form {
     /* Center the form on the page. */
     margin: 0 auto;
     width: 440px;
-    height: 300px;
+    height: 180px;
 
     max-width: 100%;
 
@@ -123,6 +167,12 @@ form {
     padding-right: 3px;
 
   }
+  .filter-form legend {
+    color: green;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
   .filter-form output {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
@@ -139,6 +189,10 @@ form {
   .filter-form__submit:hover {
     background-color: lightgreen;
     color: black;
+  }
+  .filter-form__button-wrapper {
+    width:40%;
+    margin-left: 132px;
   }
 
   input,
